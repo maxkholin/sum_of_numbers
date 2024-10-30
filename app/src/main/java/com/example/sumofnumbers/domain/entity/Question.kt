@@ -1,4 +1,4 @@
-package com.example.sumofnumbers.domain
+package com.example.sumofnumbers.domain.entity
 
 data class Question (
     val sum: Int,

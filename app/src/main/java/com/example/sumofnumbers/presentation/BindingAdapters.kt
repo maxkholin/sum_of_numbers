@@ -88,10 +88,3 @@ private fun getColorByState(context: Context, state: Boolean): Int {
 fun bindNumberAsText(textView: TextView, number: Int) {
     textView.text = number.toString()
 }
-
-@BindingAdapter("onOptionClickListener")
-fun bindOnOptionClickListener(textView: TextView, clickListener: (Int) -> Unit) {
-    textView.setOnClickListener {
-        clickListener(textView.text.toString().toInt())
-    }
-}

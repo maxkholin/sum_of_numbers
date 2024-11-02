@@ -9,23 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.sumofnumbers.R
 import com.example.sumofnumbers.databinding.FragmentGameFinishedBinding
 import com.example.sumofnumbers.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
 
-    private lateinit var gameResult: GameResult
+    private val args by navArgs<GameFinishedFragmentArgs>()
+    private val gameResult by lazy {
+        args.gameResult
+    }
 
     private var _binding: FragmentGameFinishedBinding? = null
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding == null")
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parsArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,46 +88,13 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun setRetryClickListeners() {
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                retryGame()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
-
         binding.buttonRetry.setOnClickListener {
             retryGame()
         }
     }
 
-    private fun parsArgs() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(KEY_GAME_RESULT, GameResult::class.java)?.let {
-                gameResult = it
-            }
-        } else {
-            requireArguments().getParcelable<GameResult>(KEY_GAME_RESULT)?.let {
-                gameResult = it
-            }
-        }
-    }
-
     private fun retryGame() {
-        requireActivity().supportFragmentManager
-            .popBackStack(GameFragment.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().popBackStack()
     }
 
-    companion object {
-
-        private const val KEY_GAME_RESULT = "game_settings"
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(KEY_GAME_RESULT, gameResult)
-                }
-            }
-        }
-    }
 }

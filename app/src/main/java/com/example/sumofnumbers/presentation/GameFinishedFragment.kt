@@ -42,49 +42,8 @@ class GameFinishedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setRetryClickListeners()
-        bindViews()
-    }
-
-    @SuppressLint("StringFormatMatches")
-    private fun bindViews() {
-        with(binding) {
-            emojiResult.setImageResource(getSmileResId())
-            tvRequiredAnswers.text = String.format(
-                getString(R.string.required_score),
-                gameResult.gameSettings.minCountOfRightAnswers
-            )
-            tvScoreAnswers.text = String.format(
-                getString(R.string.score_answers),
-                gameResult.countOfRightAnswers
-            )
-            tvRequiredPercentage.text = String.format(
-                getString(R.string.required_percentage),
-                gameResult.gameSettings.minPercentageOfRightAnswers
-            )
-            tvScorePercentage.text = String.format(
-                getString(R.string.score_percentage),
-                getPercentageOfRightAnswers()
-            )
-
-        }
-    }
-
-    private fun getPercentageOfRightAnswers(): Int {
-        return if (gameResult.countOfQuestion == 0) {
-            0
-        } else {
-            (gameResult.countOfRightAnswers / gameResult.countOfQuestion.toDouble() * 100).toInt()
-        }
-    }
-
-    private fun getSmileResId(): Int {
-        return if (gameResult.win) {
-            R.drawable.ic_smile
-        } else {
-            R.drawable.ic_sad
-        }
+        binding.gameResult = gameResult
     }
 
     private fun setRetryClickListeners() {

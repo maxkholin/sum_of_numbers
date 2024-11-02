@@ -104,8 +104,8 @@ class GameViewModel(
         _percentageOfRightAnswer.value = calculatePercentageOfRightAnswer()
         _progressAnswers.value = String.format(
             application.getString(R.string.progress_answers),
-            countOfRightAnswers.toString(),
-            gameSettings.minCountOfRightAnswers.toString()
+            countOfRightAnswers,
+            gameSettings.minCountOfRightAnswers
         )
         _enoughCount.value = countOfRightAnswers >= gameSettings.minCountOfRightAnswers
         _enoughPercentage.value =

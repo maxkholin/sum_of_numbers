@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".presentation.WelcomeFragment">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ImageView
-            android:id="@+id/iv_logo_brain"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_margin="32dp"
-            android:contentDescription="@string/welcome_logo"
-            android:src="@drawable/ic_brain"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/title"
-            android:textSize="24sp"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo_brain" />
+            tools:context=".presentation.WelcomeFragment">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/game_rules"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            <ImageView
+                android:id="@+id/iv_logo_brain"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_margin="32dp"
+                android:contentDescription="@string/welcome_logo"
+                android:src="@drawable/ic_brain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:id="@+id/button_go"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/button_go"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/title"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo_brain" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/game_rules"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-</ScrollView>
+            <Button
+                android:id="@+id/button_go"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/button_go"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

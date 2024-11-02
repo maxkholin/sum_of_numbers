@@ -54,6 +54,8 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         observeViewModel()
         setClickListenersToOptions()
 
@@ -68,46 +70,13 @@ class GameFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.formattedTime.observe(viewLifecycleOwner) {
-            binding.tvTimer.text = it
-        }
-        viewModel.question.observe(viewLifecycleOwner) {
-            binding.tvSum.text = it.sum.toString()
-            binding.tvLeftNumber.text = it.firstVisibleNumber.toString()
-            tvOptions.forEachIndexed { index, tv ->
-                tv.text = it.options[index].toString()
-            }
-        }
-        viewModel.percentageOfRightAnswer.observe(viewLifecycleOwner) {
-            binding.progressBar.setProgress(it, true)
-        }
-        viewModel.enoughCount.observe(viewLifecycleOwner) {
-            binding.tvAnswersProgress.setTextColor(getColorByState(it))
-        }
-        viewModel.enoughPercentage.observe(viewLifecycleOwner) {
-            binding.progressBar.progressTintList = ColorStateList.valueOf(getColorByState(it))
-        }
-        viewModel.minPercentage.observe(viewLifecycleOwner) {
-            binding.progressBar.secondaryProgress = it
-        }
+
         viewModel.gameResult.observe(viewLifecycleOwner) {
             launchGameFinishedFragment(it)
         }
-        viewModel.progressAnswers.observe(viewLifecycleOwner) {
-            binding.tvAnswersProgress.text = it
-        }
-
     }
 
-    private fun getColorByState(state: Boolean): Int {
-        val colorResId = if (state) {
-            R.color.green
-        } else {
-            R.color.red
-        }
-        return ContextCompat.getColor(requireContext(), colorResId)
 
-    }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
         findNavController()
